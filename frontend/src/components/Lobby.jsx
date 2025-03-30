@@ -34,6 +34,8 @@ const Lobby = () => {
 
   const [rooseveltAnim, setRooseveltAnim] = useState(null);
 
+  const [turingAnim, setTuringAnim] = useState(null);
+
   const [animationsLoaded, setAnimationsLoaded] = useState(false);
 
 
@@ -95,6 +97,18 @@ const Lobby = () => {
         .then((data) => setRooseveltAnim(data))
 
         .catch(err => console.error('Error loading roosevelt animation:', err));
+
+      
+
+      // Load Alan Turing animation
+
+      fetch('/alan_idle.json')
+
+        .then((res) => res.json())
+
+        .then((data) => setTuringAnim(data))
+
+        .catch(err => console.error('Error loading turing animation:', err));
 
       
 
@@ -188,6 +202,8 @@ const Lobby = () => {
     if (member.id === 'monroe') return marilynAnim;
 
     if (member.id === 'roosevelt') return rooseveltAnim;
+
+    if (member.id === 'turing') return turingAnim;
 
     return null;
 
