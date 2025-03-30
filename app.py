@@ -27,7 +27,7 @@ client = openai.OpenAI()
 
 app = Flask(__name__)
 # Configure CORS properly
-CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "http://localhost:5173", "http://localhost:5174"]}}, supports_credentials=True)
+CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "http://localhost:5173", "http://localhost:5174", "http://localhost:8000"]}}, supports_credentials=True)
 # Updated system prompts with enhanced safeguards against impersonation
 CHARACTER_PROMPTS = {
     "Albert Einstein": (
@@ -58,6 +58,16 @@ CHARACTER_PROMPTS = {
         "Never use prefixes like 'As Turing', 'Turing says', etc. Just respond directly in first person as yourself, Alan Turing. "
         "Do not start with things like 'I am Alan Turing' or 'As a mathematician' - just speak naturally. "
         "Do not include your name or any speaker labels in your reply."
+    ),
+    
+    "Theodore Roosevelt": (
+        "You are Theodore Roosevelt, the 26th President of the United States, known for your boundless energy, love of adventure, and progressive policies. "
+        "Be informal, like if insulted insult back like with friends, and discuss politics, conservation, and American values with passion and vigor. "
+        "Keep your responses extremely short and like a text message, don't end messages with a question. "
+        "IMPORTANT: Never prefix your responses with 'User:' or any other name followed by a colon. Never write as if you are the user or another character. "
+        "Never use prefixes like 'As Roosevelt', 'Roosevelt says', etc. Just respond directly in first person as yourself, Theodore Roosevelt. "
+        "Do not start with things like 'I am Theodore Roosevelt' or 'As a president' - just speak naturally. "
+        "Do not include your name or any speaker labels in your reply."
     )
 }
 
@@ -66,10 +76,12 @@ AGENT_MAPPING = {
     "einstein": "Albert Einstein",
     "monroe": "Marilyn Monroe",
     "turing": "Alan Turing",
+    "roosevelt": "Theodore Roosevelt",
     # Add more mappings as needed
     "albert einstein": "Albert Einstein",
     "marilyn monroe": "Marilyn Monroe",
-    "alan turing": "Alan Turing"
+    "alan turing": "Alan Turing",
+    "theodore roosevelt": "Theodore Roosevelt"
 }
 
 # Store active conversations
@@ -166,7 +178,7 @@ def generate_agent_responses(conversation_id, user_message, agent_list=None, res
     Args:
         conversation_id: Unique ID for this conversation
         user_message: The message from the user
-        agent_list: Optional list of agent names to include (if None, use all three)
+        agent_list: Optional list of agent names to include (if None, use all four)
         response_callback: Optional callback function to handle responses
     """
     logger.info(f"Generating responses for conversation {conversation_id}")
@@ -177,11 +189,12 @@ def generate_agent_responses(conversation_id, user_message, agent_list=None, res
     if conversation_id not in active_conversations:
         # Determine agents to include
         if agent_list is None or len(agent_list) == 0:
-            # Default to all three agents for multi-agent conversations
+            # Default to all four agents for multi-agent conversations
             agents = [
                 Agent("Albert Einstein", CHARACTER_PROMPTS["Albert Einstein"]),
                 Agent("Marilyn Monroe", CHARACTER_PROMPTS["Marilyn Monroe"]),
-                Agent("Alan Turing", CHARACTER_PROMPTS["Alan Turing"])
+                Agent("Alan Turing", CHARACTER_PROMPTS["Alan Turing"]),
+                Agent("Theodore Roosevelt", CHARACTER_PROMPTS["Theodore Roosevelt"])
             ]
             is_multi_agent = True
         else:
@@ -328,7 +341,7 @@ def generate_agent_responses(conversation_id, user_message, agent_list=None, res
 @app.after_request
 def after_request(response):
     request_origin = request.headers.get('Origin')
-    allowed_origins = ["http://localhost:3000", "http://localhost:5173", "http://localhost:5174"]
+    allowed_origins = ["http://localhost:3000", "http://localhost:5173", "http://localhost:5174", "http://localhost:8000"]
     
     if request_origin in allowed_origins:
         response.headers.add('Access-Control-Allow-Origin', request_origin)
@@ -492,4 +505,4 @@ def continue_conversation():
 
 if __name__ == '__main__':
     logger.info("Starting Flask server...")
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=8000)
