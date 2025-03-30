@@ -1,65 +1,54 @@
-# T.I.M.E Machine - Group Chat with Historical Figures
+# T.I.M.E Machine
 
-This application allows you to chat with simulated historical figures including Albert Einstein, Marilyn Monroe, and Alan Turing, either individually or in a group chat format.
+A chat application that allows you to interact with historical figures using AI.
 
-## Setup Instructions
+## Setup
 
-### 1. Get a Google Gemini API Key
-
-1. Go to [Google AI Studio](https://makersuite.google.com/app/apikey)
-2. Create a new API key
-3. Copy the API key
-
-### 2. Set Environment Variables
-
-Create a `.env` file in the project root with the following content:
-
-```
-GEMINI_API_KEY=your_api_key_here
+### Frontend (React)
+1. Install Node.js dependencies:
+```bash
+npm install
 ```
 
-### 3. Install Dependencies
+2. Start the development server:
+```bash
+npm start
+```
 
+### Backend (Python)
+1. Create a virtual environment and activate it:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+2. Install Python dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Run the Backend Server
+3. Create a `.env` file in the root directory with your OpenAI API key:
+```
+OPENAI_API_KEY=your_api_key_here
+```
 
+4. Start the Flask server:
 ```bash
 python app.py
 ```
 
-The Flask server will start on port 5000.
+## Usage
 
-### 5. Run the Frontend
-
-```bash
-cd frontend
-npm install
-npm start
-```
-
-The React frontend will start on port 3000.
+1. Open your browser and navigate to `http://localhost:3000`
+2. Select a historical figure to chat with
+3. Start a conversation!
 
 ## Features
 
-- Chat with individual historical figures
-- Create group chats with multiple historical figures
-- Responses simulate the personality and knowledge of each character
-- Interactive and responsive UI
-
-## Architecture
-
-- Frontend: React.js with a clean, intuitive interface
-- Backend: Flask API server
-- AI: Google Gemini 1.5 Pro model for generating responses
-
-## Notes
-
-- All conversations are simulated and for entertainment purposes
-- The application uses the Gemini API to generate responses in the style of the historical figures
-- Each agent has a unique prompt designed to capture their personality and knowledge
+- Chat with various historical figures
+- Persistent conversation history
+- Real-time responses using OpenAI's GPT model
+- Fallback to mock responses if the backend is unavailable
 
 ## Screenshots
 
