@@ -16,6 +16,11 @@ export const ChatProvider = ({ children }) => {
   const [bootSequence, setBootSequence] = useState(true);
   const [bootStep, setBootStep] = useState(0);
   const [showHome, setShowHome] = useState(true);
+  
+  // Group chat states
+  const [isGroupChat, setIsGroupChat] = useState(false);
+  const [groupChatAgents, setGroupChatAgents] = useState([]);
+  const [showGroupChatSelector, setShowGroupChatSelector] = useState(false);
 
   // Boot sequence text
   const bootSteps = [
@@ -39,6 +44,8 @@ export const ChatProvider = ({ children }) => {
       availableAgents.forEach(agent => {
         initialConversations[agent.id] = [];
       });
+      // Add group chat
+      initialConversations['group_chat'] = [];
       setConversations(initialConversations);
     }
   }, []);
@@ -105,8 +112,15 @@ export const ChatProvider = ({ children }) => {
     setBootStep,
     showHome,
     setShowHome,
-    bootSteps
+    bootSteps,
+    // Group chat context
+    isGroupChat,
+    setIsGroupChat,
+    groupChatAgents,
+    setGroupChatAgents,
+    showGroupChatSelector,
+    setShowGroupChatSelector
   };
 
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;
-}; 
+};

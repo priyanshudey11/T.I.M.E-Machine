@@ -2,46 +2,25 @@
 const availableAgents = [
   { 
     id: 'einstein', 
-    name: 'xXx_AEinstein_xXx', 
+    name: 'Albert Einstein', 
     title: 'Physicist', 
     avatar: '👨‍🔬',
     realName: 'Albert Einstein'
   },
   { 
-    id: 'napoleon', 
-    name: 'Napo_123', 
-    title: 'Military Leader', 
-    avatar: '👑',
-    realName: 'Napoleon Bonaparte'
+    id: 'monroe', 
+    name: 'Marilyn Monroe', 
+    title: 'Actress', 
+    avatar: '🎭',
+    realName: 'Marilyn Monroe'
   },
   { 
-    id: 'beerguy', 
-    name: 'Massive Beer Guy', 
-    title: 'Party Animal', 
-    avatar: '💪',
-    realName: 'Historical Party Enthusiast'
-  },
-  { 
-    id: 'cleopatra', 
-    name: 'QueenCleo', 
-    title: 'Egyptian Ruler', 
-    avatar: '👸',
-    realName: 'Cleopatra VII'
-  },
-  { 
-    id: 'davinci', 
-    name: 'ArtMan1452', 
-    title: 'Renaissance Genius', 
-    avatar: '🎨',
-    realName: 'Leonardo da Vinci'
-  },
-  { 
-    id: 'newton', 
-    name: 'AppleFaller', 
-    title: 'Gravity Expert', 
-    avatar: '🍎',
-    realName: 'Isaac Newton'
-  },
+    id: 'turing', 
+    name: 'Alan Turing', 
+    title: 'Computer Scientist', 
+    avatar: '💻',
+    realName: 'Alan Turing'
+  }
 ];
 
 export default availableAgents; 

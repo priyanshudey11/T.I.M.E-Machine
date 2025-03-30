@@ -1,14 +1,54 @@
-# T.I.M.E Machine - Chat with Historical Figures
+# T.I.M.E Machine
 
-A Discord-style chat interface that lets you converse with AI versions of historical figures.
+A chat application that allows you to interact with historical figures using AI.
+
+## Setup
+
+### Frontend (React)
+1. Install Node.js dependencies:
+```bash
+npm install
+```
+
+2. Start the development server:
+```bash
+npm start
+```
+
+### Backend (Python)
+1. Create a virtual environment and activate it:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+2. Install Python dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+3. Create a `.env` file in the root directory with your OpenAI API key:
+```
+OPENAI_API_KEY=your_api_key_here
+```
+
+4. Start the Flask server:
+```bash
+python app.py
+```
+
+## Usage
+
+1. Open your browser and navigate to `http://localhost:3000`
+2. Select a historical figure to chat with
+3. Start a conversation!
 
 ## Features
 
-- Discord-like UI with character list in the sidebar
-- Individual conversations with each historical figure
-- Persistent chat history using localStorage
-- Modular architecture ready for Gemini API integration
-- Responsive design
+- Chat with various historical figures
+- Persistent conversation history
+- Real-time responses using OpenAI's GPT model
+- Fallback to mock responses if the backend is unavailable
 
 ## Screenshots
 
