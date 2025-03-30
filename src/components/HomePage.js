@@ -1,9 +1,11 @@
 import React from 'react';
 import { useChat } from '../context/ChatContext';
+import { useChatActions } from '../hooks/useChatActions';
 import availableAgents from '../utils/agentData';
 
 const HomePage = ({ onAgentSelect }) => {
   const { conversations } = useChat();
+  const { openGroupChatSelector } = useChatActions();
   const agents = availableAgents;
   
   // Get the most recent message from each conversation
@@ -46,17 +48,51 @@ const HomePage = ({ onAgentSelect }) => {
     return Math.random() > 0.5 ? 'online' : 'offline';
   };
 
+  const handleGroupChatClick = () => {
+    console.log('Group chat button clicked');
+    openGroupChatSelector();
+  };
+
   return (
     <div className="flex h-screen bg-gray-800 text-white font-sans overflow-hidden">
       {/* Left Sidebar: Members List */}
       <div className="w-64 border-r border-gray-700 flex flex-col">
         {/* Sidebar header */}
-        <div className="h-16 border-b border-gray-700 px-4 flex items-center">
+        <div className="h-16 border-b border-gray-700 px-4 flex items-center justify-between">
           <div className="font-bold text-xl">Members:</div>
+          <button
+            onClick={handleGroupChatClick}
+            className="p-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
+            title="Create Group Chat"
+          >
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z" />
+              <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z" />
+            </svg>
+          </button>
         </div>
         
         {/* Members list with scrollbar */}
         <div className="flex-1 overflow-y-auto py-2 px-3">
+          {/* Group Chat Option */}
+          <div 
+            className="bg-gray-750 rounded-lg p-3 mb-3 cursor-pointer hover:bg-gray-700 transition-colors"
+            onClick={handleGroupChatClick}
+          >
+            <div className="flex items-center">
+              <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-2xl mr-3">
+                👥
+              </div>
+              <div className="flex-1">
+                <div className="font-medium">Group Chat</div>
+                <div className="flex items-center text-sm">
+                  <div className="w-2 h-2 rounded-full mr-2 bg-green-500"></div>
+                  <div className="text-green-400">Create new group chat</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {agents.map(agent => {
             const status = getAgentStatus(agent.id);
             

@@ -32,22 +32,25 @@ export const ChatProvider = ({ children }) => {
     "System ready."
   ];
 
+  // Load conversations from localStorage on component mount
   useEffect(() => {
     // Load saved conversations or initialize new ones
     const savedConversations = loadConversations();
     
-    if (savedConversations) {
-      setConversations(savedConversations);
-    } else {
-      // Initialize empty conversations for each agent
-      const initialConversations = {};
-      availableAgents.forEach(agent => {
+    // Initialize with default values if nothing was loaded
+    const initialConversations = {
+      ...savedConversations,
+      'group_chat': savedConversations['group_chat'] || []
+    };
+    
+    // Add empty arrays for any missing agents
+    availableAgents.forEach(agent => {
+      if (!initialConversations[agent.id]) {
         initialConversations[agent.id] = [];
-      });
-      // Add group chat
-      initialConversations['group_chat'] = [];
-      setConversations(initialConversations);
-    }
+      }
+    });
+    
+    setConversations(initialConversations);
   }, []);
 
   // Save conversations whenever they change
@@ -57,6 +60,7 @@ export const ChatProvider = ({ children }) => {
     }
   }, [conversations]);
 
+  // Handle boot sequence
   useEffect(() => {
     if (bootSequence && currentAgent) {
       const timer = setTimeout(() => {
@@ -79,20 +83,22 @@ export const ChatProvider = ({ children }) => {
           setBootSequence(false);
           const currentAgentData = availableAgents.find(a => a.id === currentAgent);
           
-          setConversations(prev => {
-            // Only add welcome message if conversation is just the boot sequence
-            if (prev[currentAgent] && prev[currentAgent].length > bootSteps.length) {
-              return prev;
-            }
-            
-            return {
-              ...prev,
-              [currentAgent]: [
-                ...(prev[currentAgent] || []), 
-                { type: 'system', content: `Welcome to the T.I.M.E Machine Interface. You are now chatting with ${currentAgentData.name}.` }
-              ]
-            };
-          });
+          if (currentAgentData) {
+            setConversations(prev => {
+              // Only add welcome message if conversation is just the boot sequence
+              if (prev[currentAgent] && prev[currentAgent].length > bootSteps.length) {
+                return prev;
+              }
+              
+              return {
+                ...prev,
+                [currentAgent]: [
+                  ...(prev[currentAgent] || []), 
+                  { type: 'system', content: `Welcome to the T.I.M.E Machine Interface. You are now chatting with ${currentAgentData.name}.` }
+                ]
+              };
+            });
+          }
         }
       }, bootStep === 0 ? 500 : 800);
       return () => clearTimeout(timer);

@@ -3,7 +3,8 @@ import { useChat } from '../context/ChatContext';
 import { 
   sendAgentMessage, 
   startConversation,
-  continueConversation
+  continueConversation,
+  getResponses
 } from '../services/chatService';
 import availableAgents from '../utils/agentData';
 
@@ -142,38 +143,95 @@ export const useChatActions = () => {
       ...prev,
       [groupChatKey]: [...(prev[groupChatKey] || []), { id: loadingId, type: 'loading', content: 'Typing...' }]
     }));
-
+  
     try {
       // Get the full names of the selected agents
       const agentNames = groupChatAgents.map(agentId => {
         const agent = availableAgents.find(a => a.id === agentId);
         return agent ? agent.realName : null;
       }).filter(Boolean);
-
+  
       if (agentNames.length === 0) {
         throw new Error('No valid agents selected for group chat');
       }
-
-      // Start or continue a multi-agent conversation
-      const responses = await continueConversation(question);
+  
+      console.log('Continuing conversation with message:', question);
       
-      // Remove loading message and add responses
+      // Send the message to start the conversation
+      await continueConversation(question);
+      
+      // Remove loading message
       setConversations(prev => {
         const chatConversation = prev[groupChatKey] || [];
-        const filteredConversation = chatConversation.filter(msg => msg.id !== loadingId);
-        
-        // Add each agent's response
-        const newMessages = responses.map(response => ({
-          type: 'agent',
-          content: response.content,
-          agent: response.agent
-        }));
-        
         return {
           ...prev,
-          [groupChatKey]: [...filteredConversation, ...newMessages]
+          [groupChatKey]: chatConversation.filter(msg => msg.id !== loadingId)
         };
       });
+      
+      // Poll for responses with a shorter interval
+      let previousResponses = [];
+      const maxPolls = 20; // Maximum number of polling attempts
+      let pollCount = 0;
+      
+      const pollForResponses = async () => {
+        if (pollCount >= maxPolls) return;
+        pollCount++;
+        
+        try {
+          // Get current responses
+          const data = await getResponses();
+          const responses = data.responses || [];
+          console.log(`Poll ${pollCount}: Received ${responses.length} responses`);
+          
+          // Find new responses that weren't processed before
+          const newResponses = responses.filter(response => 
+            !previousResponses.some(prev => 
+              prev.agent === response.agent && prev.content === response.content
+            )
+          );
+          
+          if (newResponses.length > 0) {
+            console.log('New responses:', newResponses);
+            
+            // Add each new response individually with a slight delay
+            for (const response of newResponses) {
+              // Add this response to the conversation
+              setConversations(prev => {
+                return {
+                  ...prev,
+                  [groupChatKey]: [
+                    ...(prev[groupChatKey] || []), 
+                    {
+                      type: 'agent',
+                      content: response.content,
+                      agent: response.agent,
+                      timestamp: Date.now()
+                    }
+                  ]
+                };
+              });
+              
+              // Wait a bit before showing the next response
+              await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            
+            // Update previous responses
+            previousResponses = [...previousResponses, ...newResponses];
+          }
+          
+          // Continue polling if we haven't reached the limit
+          if (pollCount < maxPolls) {
+            setTimeout(pollForResponses, 1000);
+          }
+        } catch (error) {
+          console.error('Error polling for responses:', error);
+        }
+      };
+      
+      // Start polling
+      pollForResponses();
+      
     } catch (error) {
       console.error('Error generating group response:', error);
       
@@ -248,7 +306,7 @@ export const useChatActions = () => {
         setConversations(prev => ({
           ...prev,
           [agentId]: [
-            { type: 'system', content: 'Error starting conversation. Please try again.' }
+            { type: 'system', content: 'Sorry, I encountered an error starting the conversation. Please try again.' }
           ]
         }));
       }
@@ -262,44 +320,94 @@ export const useChatActions = () => {
   };
 
   const openGroupChatSelector = () => {
+    console.log('openGroupChatSelector called');
+    console.log('Current showGroupChatSelector state:', showGroupChatSelector);
     setShowGroupChatSelector(true);
+    console.log('Setting showGroupChatSelector to true');
   };
 
   const closeGroupChatSelector = () => {
     setShowGroupChatSelector(false);
   };
 
-  const startGroupChat = async (selectedAgentIds) => {
-    if (selectedAgentIds.length === 0) return;
+  const startGroupChat = async (selectedAgents) => {
+    console.log('Starting group chat with agents:', selectedAgents);
     
-    setGroupChatAgents(selectedAgentIds);
-    setIsGroupChat(true);
-    setCurrentAgent('group_chat');
-    
-    // Initialize group chat conversation
-    setConversations(prev => ({
-      ...prev,
-      group_chat: [
-        { 
-          type: 'system', 
-          content: `Welcome to the group chat! You are now chatting with ${selectedAgentIds.length} historical figures.` 
-        }
-      ]
-    }));
+    try {
+      // Get the full names of the selected agents
+      const agentNames = selectedAgents.map(id => {
+        const agent = availableAgents.find(a => a.id === id);
+        return agent ? agent.realName : null;
+      }).filter(Boolean);
+
+      if (agentNames.length === 0) {
+        throw new Error('No valid agents selected for group chat');
+      }
+
+      // Start a new multi-agent conversation
+      const conversationId = await startConversation(
+        null,              // No single agent ID for group chat
+        '',                // Empty initial message
+        true,              // This is a multi-agent conversation
+        agentNames         // List of agent names
+      );
+
+      console.log(`Started group chat with ID: ${conversationId}`);
+      
+      // Set the selected agents
+      setGroupChatAgents(selectedAgents);
+      
+      // Set group chat mode
+      setIsGroupChat(true);
+      
+      // Set current agent to group_chat
+      setCurrentAgent('group_chat');
+      
+      // Hide home screen
+      setShowHome(false);
+      
+      // Initialize group chat conversation if it doesn't exist
+      if (!conversations['group_chat']) {
+        setConversations(prev => ({
+          ...prev,
+          'group_chat': []
+        }));
+      }
+      
+      // Add welcome message
+      setConversations(prev => ({
+        ...prev,
+        'group_chat': [
+          { 
+            type: 'system', 
+            content: `Welcome to the group chat with ${agentNames.join(', ')}! You can now chat with all of them simultaneously.` 
+          }
+        ]
+      }));
+    } catch (error) {
+      console.error('Error starting group chat:', error);
+      // Add error message to conversation
+      setConversations(prev => ({
+        ...prev,
+        'group_chat': [
+          { 
+            type: 'system', 
+            content: 'Sorry, I encountered an error starting the group chat. Please try again.' 
+          }
+        ]
+      }));
+    }
   };
 
   return {
-    inputValue,
-    setInputValue,
     handleSubmit,
     generateResponse,
-    switchAgent,
-    goToHome,
-    messagesEndRef,
-    showGroupChatSelector,
+    generateGroupResponse,
     openGroupChatSelector,
     closeGroupChatSelector,
+    messagesEndRef,
     startGroupChat,
-    isGroupChat
+    handleSingleAgentSubmit,
+    handleGroupChatSubmit
   };
 };

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import availableAgents from '../utils/agentData';
 
 const GroupChatSelector = ({ onStartGroupChat, onClose }) => {
+  console.log('GroupChatSelector rendered');
   const [selectedAgents, setSelectedAgents] = useState([]);
 
   const toggleAgent = (agentId) => {
@@ -22,8 +23,16 @@ const GroupChatSelector = ({ onStartGroupChat, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-gray-800 rounded-lg p-6 w-96">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999]">
+      <div className="bg-gray-800 rounded-lg p-6 w-96 relative">
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-400 hover:text-white"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
         <h2 className="text-xl font-bold mb-4 text-white">Create Group Chat</h2>
         <p className="text-gray-400 mb-4">Select the agents you want to include in the group chat:</p>
         <div className="space-y-2 max-h-96 overflow-y-auto">
