@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import AppWrapper from './AppWrapper';
+import { ChatProvider } from './context/ChatContext';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <ChatProvider>
+      <AppWrapper />
+    </ChatProvider>
   </React.StrictMode>
 );
 

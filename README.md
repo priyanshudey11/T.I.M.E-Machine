@@ -1,70 +1,86 @@
-# Getting Started with Create React App
+# T.I.M.E Machine - Chat with Historical Figures
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A Discord-style chat interface that lets you converse with AI versions of historical figures.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Discord-like UI with character list in the sidebar
+- Individual conversations with each historical figure
+- Persistent chat history using localStorage
+- Modular architecture ready for Gemini API integration
+- Responsive design
 
-### `npm start`
+## Screenshots
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+(Screenshots will be added later)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/T.I.M.E-Machine.git
+cd T.I.M.E-Machine
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Install dependencies:
+```bash
+npm install
+```
 
-### `npm run build`
+3. Set up Gemini API (optional):
+   - Get an API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
+   - Create a `.env` file in the root directory with:
+   ```
+   REACT_APP_GEMINI_API_KEY=your_api_key_here
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. Start the development server:
+```bash
+npm start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Connecting to Gemini API
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This application is designed to work with Google's Gemini API. By default, it will use mock responses if the API is not configured.
 
-### `npm run eject`
+To enable Gemini API:
+1. Get an API key from Google AI Studio
+2. Add your key to the `.env` file
+3. The app will automatically switch from mock responses to using the real API
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Project Structure
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+src/
+├── components/       # React components
+│   ├── Sidebar.js    # Character list sidebar
+│   ├── ChatHeader.js # Conversation header
+│   ├── MessageList.js # Message display area
+│   └── MessageInput.js # Input component
+├── services/         # Business logic and API services
+│   ├── chatService.js # Chat operations and storage
+│   └── geminiService.js # Gemini API integration
+├── utils/            # Utility functions and constants
+│   └── agentData.js  # Historical figure data
+├── App.js            # Main application component
+└── index.js          # Application entry point
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Technologies Used
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- React
+- JavaScript
+- CSS (Tailwind-like utilities)
+- localStorage for persistence
+- Google Gemini API (optional)
 
-## Learn More
+## Future Improvements
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Add user settings and preferences
+- Implement additional historical figures
+- Add message search functionality
+- Enable image sharing and rich media in conversations
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## License
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+MIT
