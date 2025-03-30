@@ -38,7 +38,7 @@ const debugLog = (...args) => {
 };
 
 // Valid agent IDs - keep this in sync with other parts of code
-const VALID_AGENT_IDS = ['einstein', 'monroe', 'turing', 'group_chat'];
+const VALID_AGENT_IDS = ['einstein', 'monroe', 'turing', 'roosevelt', 'tesla', 'edison', 'group_chat'];
 
 // Chat Provider component
 export const ChatProvider = ({ children }) => {

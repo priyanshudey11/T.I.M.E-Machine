@@ -1,0 +1,25 @@
+2025-03-30 13:20:36,229 - INFO - Available agents in CHARACTER_PROMPTS:
+2025-03-30 13:20:36,230 - INFO - - Albert Einstein
+2025-03-30 13:20:36,230 - INFO - - Marilyn Monroe
+2025-03-30 13:20:36,230 - INFO - - Alan Turing
+2025-03-30 13:20:36,230 - INFO - - Theodore Roosevelt
+2025-03-30 13:20:36,230 - INFO - - Nikola Tesla
+2025-03-30 13:20:36,230 - INFO - - Thomas Alva Edison
+2025-03-30 13:20:36,230 - INFO - Agent mapping created:
+2025-03-30 13:20:36,230 - INFO - - einstein -> Albert Einstein
+2025-03-30 13:20:36,230 - INFO - - monroe -> Marilyn Monroe
+2025-03-30 13:20:36,230 - INFO - - turing -> Alan Turing
+2025-03-30 13:20:36,230 - INFO - - roosevelt -> Theodore Roosevelt
+2025-03-30 13:20:36,230 - INFO - - tesla -> Nikola Tesla
+2025-03-30 13:20:36,230 - INFO - - edison -> Thomas Alva Edison
+2025-03-30 13:20:36,230 - INFO - - albert einstein -> Albert Einstein
+2025-03-30 13:20:36,230 - INFO - - marilyn monroe -> Marilyn Monroe
+2025-03-30 13:20:36,230 - INFO - - alan turing -> Alan Turing
+2025-03-30 13:20:36,230 - INFO - - theodore roosevelt -> Theodore Roosevelt
+2025-03-30 13:20:36,230 - INFO - - nikola tesla -> Nikola Tesla
+2025-03-30 13:20:36,230 - INFO - - thomas alva edison -> Thomas Alva Edison
+2025-03-30 13:20:36,232 - INFO - Starting Flask server...
+2025-03-30 13:20:36,244 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:8000
+2025-03-30 13:20:36,245 - INFO - [33mPress CTRL+C to quit[0m
+2025-03-30 13:20:36,521 - INFO -  * Restarting with watchdog (fsevents)

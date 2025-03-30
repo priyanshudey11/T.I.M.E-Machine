@@ -34,7 +34,9 @@ const Lobby = () => {
 
   const [rooseveltAnim, setRooseveltAnim] = useState(null);
 
-  const [turingAnim, setTuringAnim] = useState(null);
+  const [teslaAnim, setTeslaAnim] = useState(null);
+
+  const [edisonAnim, setEdisonAnim] = useState(null);
 
   const [animationsLoaded, setAnimationsLoaded] = useState(false);
 
@@ -98,18 +100,21 @@ const Lobby = () => {
 
         .catch(err => console.error('Error loading roosevelt animation:', err));
 
-      
-
-      // Load Alan Turing animation
-
-      fetch('/alan_idle.json')
+      fetch('/tesla_idle.json')
 
         .then((res) => res.json())
 
-        .then((data) => setTuringAnim(data))
+        .then((data) => setTeslaAnim(data))
 
-        .catch(err => console.error('Error loading turing animation:', err));
+        .catch(err => console.error('Error loading tesla animation:', err));
+      
+      fetch('/edison_idle.json')
 
+        .then((res) => res.json())
+
+        .then((data) => setEdisonAnim(data))
+
+        .catch(err => console.error('Error loading edison animation:', err));
       
 
       setAnimationsLoaded(true);
@@ -127,7 +132,7 @@ const Lobby = () => {
   // Initialize agent chats if they don't exist
   useEffect(() => {
     // Make sure we have chats for each agent
-    const validAgentIds = ['einstein', 'monroe', 'turing', 'roosevelt'];
+    const validAgentIds = ['einstein', 'monroe', 'turing', 'roosevelt', 'tesla', 'edison'];
     
     validAgentIds.forEach(agentId => {
       const agentChat = chats.find(chat => chat.id === agentId);
@@ -147,7 +152,7 @@ const Lobby = () => {
 
   const handleMemberClick = (agent) => {
     // Validate that this is a proper agent ID
-    const validAgentIds = ['einstein', 'monroe', 'turing', 'roosevelt'];
+    const validAgentIds = ['einstein', 'monroe', 'turing', 'roosevelt', 'tesla', 'edison'];
     if (!validAgentIds.includes(agent.id)) {
       console.error(`Invalid agent ID: ${agent.id}`);
       return;
@@ -203,7 +208,9 @@ const Lobby = () => {
 
     if (member.id === 'roosevelt') return rooseveltAnim;
 
-    if (member.id === 'turing') return turingAnim;
+    if (member.id === 'tesla') return teslaAnim;
+
+    if (member.id === 'edison') return edisonAnim;
 
     return null;
 

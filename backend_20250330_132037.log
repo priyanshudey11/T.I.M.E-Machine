@@ -1,0 +1,344 @@
+2025-03-30 13:20:37,213 - INFO - Available agents in CHARACTER_PROMPTS:
+2025-03-30 13:20:37,213 - INFO - - Albert Einstein
+2025-03-30 13:20:37,213 - INFO - - Marilyn Monroe
+2025-03-30 13:20:37,213 - INFO - - Alan Turing
+2025-03-30 13:20:37,213 - INFO - - Theodore Roosevelt
+2025-03-30 13:20:37,213 - INFO - - Nikola Tesla
+2025-03-30 13:20:37,213 - INFO - - Thomas Alva Edison
+2025-03-30 13:20:37,213 - INFO - Agent mapping created:
+2025-03-30 13:20:37,213 - INFO - - einstein -> Albert Einstein
+2025-03-30 13:20:37,213 - INFO - - monroe -> Marilyn Monroe
+2025-03-30 13:20:37,213 - INFO - - turing -> Alan Turing
+2025-03-30 13:20:37,214 - INFO - - roosevelt -> Theodore Roosevelt
+2025-03-30 13:20:37,214 - INFO - - tesla -> Nikola Tesla
+2025-03-30 13:20:37,214 - INFO - - edison -> Thomas Alva Edison
+2025-03-30 13:20:37,214 - INFO - - albert einstein -> Albert Einstein
+2025-03-30 13:20:37,214 - INFO - - marilyn monroe -> Marilyn Monroe
+2025-03-30 13:20:37,214 - INFO - - alan turing -> Alan Turing
+2025-03-30 13:20:37,214 - INFO - - theodore roosevelt -> Theodore Roosevelt
+2025-03-30 13:20:37,214 - INFO - - nikola tesla -> Nikola Tesla
+2025-03-30 13:20:37,214 - INFO - - thomas alva edison -> Thomas Alva Edison
+2025-03-30 13:20:37,215 - INFO - Starting Flask server...
+2025-03-30 13:20:37,221 - WARNING -  * Debugger is active!
+2025-03-30 13:20:37,538 - INFO -  * Debugger PIN: 122-838-912
+2025-03-30 13:20:52,215 - INFO - 127.0.0.1 - - [30/Mar/2025 13:20:52] "[35m[1mOPTIONS /start_conversation HTTP/1.1[0m" 204 -
+2025-03-30 13:20:52,221 - INFO - Request JSON for start_conversation: {'agent_id': 'Nikola Tesla', 'message': 'Hi, how is it going?', 'multi_agent': False, 'agent_list': []}
+2025-03-30 13:20:52,222 - INFO - Starting new conversation
+2025-03-30 13:20:52,222 - INFO - Conversation mode: single-agent
+2025-03-30 13:20:52,222 - INFO - Starting single-agent conversation with Nikola Tesla
+2025-03-30 13:20:52,222 - INFO - Generating responses for conversation conv_1743355252
+2025-03-30 13:20:52,222 - INFO - User message: Hi, how is it going?
+2025-03-30 13:20:52,222 - INFO - Agent list: ['Nikola Tesla']
+2025-03-30 13:20:52,222 - INFO - Created single-agent conversation with 1 agents
+2025-03-30 13:20:52,223 - INFO - Processing responses for conversation conv_1743355252 (multi-agent: False)
+2025-03-30 13:20:52,223 - INFO - 127.0.0.1 - - [30/Mar/2025 13:20:52] "POST /start_conversation HTTP/1.1" 200 -
+2025-03-30 13:20:52,223 - INFO - Generating single-agent response from Nikola Tesla
+2025-03-30 13:20:52,555 - INFO - Returning 0 responses for conversation conv_1743355252
+2025-03-30 13:20:52,556 - INFO - 127.0.0.1 - - [30/Mar/2025 13:20:52] "GET /get_responses/conv_1743355252 HTTP/1.1" 200 -
+2025-03-30 13:20:53,424 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-30 13:20:53,438 - INFO - Single-agent response from Nikola Tesla: Just charged up and ready to revolutionize the wor...
+2025-03-30 13:20:53,563 - INFO - Returning 1 responses for conversation conv_1743355252
+2025-03-30 13:20:53,564 - INFO - 127.0.0.1 - - [30/Mar/2025 13:20:53] "GET /get_responses/conv_1743355252 HTTP/1.1" 200 -
+2025-03-30 13:20:53,890 - INFO - Returning 0 responses for conversation conv_1743355252
+2025-03-30 13:20:53,890 - INFO - 127.0.0.1 - - [30/Mar/2025 13:20:53] "GET /get_responses/conv_1743355252 HTTP/1.1" 200 -
+2025-03-30 13:20:55,156 - INFO - Returning 0 responses for conversation conv_1743355252
+2025-03-30 13:20:55,157 - INFO - 127.0.0.1 - - [30/Mar/2025 13:20:55] "GET /get_responses/conv_1743355252 HTTP/1.1" 200 -
+2025-03-30 13:20:55,159 - INFO - Returning 0 responses for conversation conv_1743355252
+2025-03-30 13:20:55,159 - INFO - 127.0.0.1 - - [30/Mar/2025 13:20:55] "GET /get_responses/conv_1743355252 HTTP/1.1" 200 -
+2025-03-30 13:20:57,766 - INFO - Returning 0 responses for conversation conv_1743355252
+2025-03-30 13:20:57,767 - INFO - 127.0.0.1 - - [30/Mar/2025 13:20:57] "GET /get_responses/conv_1743355252 HTTP/1.1" 200 -
+2025-03-30 13:20:57,770 - INFO - Returning 0 responses for conversation conv_1743355252
+2025-03-30 13:20:57,770 - INFO - 127.0.0.1 - - [30/Mar/2025 13:20:57] "GET /get_responses/conv_1743355252 HTTP/1.1" 200 -
+2025-03-30 13:20:58,792 - INFO - Returning 0 responses for conversation conv_1743355252
+2025-03-30 13:20:58,792 - INFO - 127.0.0.1 - - [30/Mar/2025 13:20:58] "GET /get_responses/conv_1743355252 HTTP/1.1" 200 -
+2025-03-30 13:20:58,795 - INFO - Returning 0 responses for conversation conv_1743355252
+2025-03-30 13:20:58,795 - INFO - 127.0.0.1 - - [30/Mar/2025 13:20:58] "GET /get_responses/conv_1743355252 HTTP/1.1" 200 -
+2025-03-30 13:20:59,285 - INFO - 127.0.0.1 - - [30/Mar/2025 13:20:59] "[35m[1mOPTIONS /start_conversation HTTP/1.1[0m" 204 -
+2025-03-30 13:20:59,287 - INFO - Request JSON for start_conversation: {'agent_id': None, 'message': 'Hi!', 'multi_agent': True, 'agent_list': ['Albert Einstein', 'Marilyn Monroe', 'Alan Turing', 'Theodore Roosevelt', 'Nikola Tesla', 'Thomas Edison']}
+2025-03-30 13:20:59,287 - INFO - Starting new conversation
+2025-03-30 13:20:59,287 - INFO - Conversation mode: multi-agent
+2025-03-30 13:20:59,288 - INFO - Using provided agent_list: ['Albert Einstein', 'Marilyn Monroe', 'Alan Turing', 'Theodore Roosevelt', 'Nikola Tesla', 'Thomas Edison']
+2025-03-30 13:20:59,288 - INFO - Generating responses for conversation conv_1743355259
+2025-03-30 13:20:59,288 - INFO - User message: Hi!
+2025-03-30 13:20:59,288 - INFO - Agent list: ['Albert Einstein', 'Marilyn Monroe', 'Alan Turing', 'Theodore Roosevelt', 'Nikola Tesla', 'Thomas Edison']
+2025-03-30 13:20:59,288 - INFO - Created multi-agent conversation with 5 agents
+2025-03-30 13:20:59,288 - INFO - Processing responses for conversation conv_1743355259 (multi-agent: True)
+2025-03-30 13:20:59,288 - INFO - 127.0.0.1 - - [30/Mar/2025 13:20:59] "POST /start_conversation HTTP/1.1" 200 -
+2025-03-30 13:20:59,627 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:20:59,628 - INFO - 127.0.0.1 - - [30/Mar/2025 13:20:59] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:20:59,803 - INFO - Returning 0 responses for conversation conv_1743355252
+2025-03-30 13:20:59,803 - INFO - 127.0.0.1 - - [30/Mar/2025 13:20:59] "GET /get_responses/conv_1743355252 HTTP/1.1" 200 -
+2025-03-30 13:20:59,805 - INFO - Returning 0 responses for conversation conv_1743355252
+2025-03-30 13:20:59,806 - INFO - 127.0.0.1 - - [30/Mar/2025 13:20:59] "GET /get_responses/conv_1743355252 HTTP/1.1" 200 -
+2025-03-30 13:20:59,913 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-30 13:20:59,916 - INFO - Agent Albert Einstein responded: Hey there! What's on your mind?...
+2025-03-30 13:21:00,640 - INFO - Returning 1 responses for conversation conv_1743355259
+2025-03-30 13:21:00,641 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:00] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:00,730 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-30 13:21:00,733 - INFO - Agent Marilyn Monroe responded: What's the buzz?...
+2025-03-30 13:21:00,811 - INFO - Returning 0 responses for conversation conv_1743355252
+2025-03-30 13:21:00,812 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:00] "GET /get_responses/conv_1743355252 HTTP/1.1" 200 -
+2025-03-30 13:21:00,814 - INFO - Returning 0 responses for conversation conv_1743355252
+2025-03-30 13:21:00,814 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:00] "GET /get_responses/conv_1743355252 HTTP/1.1" 200 -
+2025-03-30 13:21:00,960 - INFO - Returning 1 responses for conversation conv_1743355259
+2025-03-30 13:21:00,960 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:00] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:01,278 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:01,279 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:01] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:01,648 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:01,648 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:01] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:01,822 - INFO - Returning 0 responses for conversation conv_1743355252
+2025-03-30 13:21:01,822 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:01] "GET /get_responses/conv_1743355252 HTTP/1.1" 200 -
+2025-03-30 13:21:01,824 - INFO - Returning 0 responses for conversation conv_1743355252
+2025-03-30 13:21:01,824 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:01] "GET /get_responses/conv_1743355252 HTTP/1.1" 200 -
+2025-03-30 13:21:01,974 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:01,975 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:01] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:02,298 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:02,299 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:02] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:02,370 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-30 13:21:02,372 - INFO - Agent Alan Turing responded: Just trying to solve the world's problems, one puz...
+2025-03-30 13:21:02,673 - INFO - Returning 1 responses for conversation conv_1743355259
+2025-03-30 13:21:02,674 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:02] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:02,827 - INFO - Returning 0 responses for conversation conv_1743355252
+2025-03-30 13:21:02,828 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:02] "GET /get_responses/conv_1743355252 HTTP/1.1" 200 -
+2025-03-30 13:21:02,830 - INFO - Returning 0 responses for conversation conv_1743355252
+2025-03-30 13:21:02,834 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:02] "GET /get_responses/conv_1743355252 HTTP/1.1" 200 -
+2025-03-30 13:21:02,981 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:02,981 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:02] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:02,990 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:02,990 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:02] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:03,308 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:03,308 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:03] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:03,394 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-30 13:21:03,397 - INFO - Agent Theodore Roosevelt responded: Living the dream! Ready to tackle some big ideas?...
+2025-03-30 13:21:03,708 - INFO - Returning 1 responses for conversation conv_1743355259
+2025-03-30 13:21:03,708 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:03] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:03,835 - INFO - Returning 0 responses for conversation conv_1743355252
+2025-03-30 13:21:03,835 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:03] "GET /get_responses/conv_1743355252 HTTP/1.1" 200 -
+2025-03-30 13:21:03,841 - INFO - Returning 0 responses for conversation conv_1743355252
+2025-03-30 13:21:03,842 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:03] "GET /get_responses/conv_1743355252 HTTP/1.1" 200 -
+2025-03-30 13:21:03,987 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:03,988 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:03] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:04,000 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:04,000 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:04] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:04,022 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:04,023 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:04] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:04,211 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-30 13:21:04,213 - INFO - Agent Nikola Tesla responded: Absolutely! The future is electric, my friend....
+2025-03-30 13:21:04,313 - INFO - Returning 1 responses for conversation conv_1743355259
+2025-03-30 13:21:04,314 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:04] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:04,631 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:04,631 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:04] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:04,715 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:04,715 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:04] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:04,846 - INFO - Returning 0 responses for conversation conv_1743355252
+2025-03-30 13:21:04,847 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:04] "GET /get_responses/conv_1743355252 HTTP/1.1" 200 -
+2025-03-30 13:21:04,863 - INFO - Returning 0 responses for conversation conv_1743355252
+2025-03-30 13:21:04,864 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:04] "GET /get_responses/conv_1743355252 HTTP/1.1" 200 -
+2025-03-30 13:21:05,001 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:05,001 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:05] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:05,010 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:05,011 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:05] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:05,036 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:05,037 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:05] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:05,339 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:05,339 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:05] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:05,541 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-30 13:21:05,545 - INFO - Agent Theodore Roosevelt responded: Electricity is just the beginning! Let’s talk abou...
+2025-03-30 13:21:05,641 - INFO - Returning 1 responses for conversation conv_1743355259
+2025-03-30 13:21:05,642 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:05] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:05,727 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:05,728 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:05] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:05,872 - INFO - Returning 0 responses for conversation conv_1743355252
+2025-03-30 13:21:05,873 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:05] "GET /get_responses/conv_1743355252 HTTP/1.1" 200 -
+2025-03-30 13:21:05,959 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:05,960 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:05] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:06,011 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:06,011 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:06] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:06,020 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:06,020 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:06] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:06,047 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:06,047 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:06] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:06,345 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:06,345 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:06] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:06,671 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:06,671 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:06] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:06,733 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:06,734 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:06] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:06,976 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:06,977 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:06] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:07,020 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:07,021 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:07] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:07,028 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:07,028 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:07] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:07,054 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:07,054 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:07] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:07,352 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:07,353 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:07] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:07,591 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-30 13:21:07,594 - INFO - Agent Nikola Tesla responded: Nature’s power can illuminate the world! Just like...
+2025-03-30 13:21:07,681 - INFO - Returning 1 responses for conversation conv_1743355259
+2025-03-30 13:21:07,682 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:07] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:07,741 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:07,741 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:07] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:07,984 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:07,984 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:07] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:07,994 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:07,995 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:07] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:08,031 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:08,032 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:08] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:08,045 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:08,046 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:08] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:08,062 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:08,063 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:08] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:08,361 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:08,361 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:08] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:08,710 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:08,711 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:08] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:08,746 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:08,747 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:08] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:08,991 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:08,992 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:08] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:09,006 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:09,006 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:09] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:09,051 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:09,052 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:09] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:09,064 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:09,065 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:09] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:09,073 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:09,074 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:09] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:09,130 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-30 13:21:09,133 - INFO - Agent Theodore Roosevelt responded: Revolution indeed! We need to protect our wild spa...
+2025-03-30 13:21:09,381 - INFO - Returning 1 responses for conversation conv_1743355259
+2025-03-30 13:21:09,381 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:09] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:09,697 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:09,698 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:09] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:09,716 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:09,717 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:09] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:09,753 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:09,754 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:09] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:10,014 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:10,014 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:10] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:10,028 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:10,028 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:10] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:10,072 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:10,073 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:10] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:10,086 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:10,086 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:10] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:10,087 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:10,087 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:10] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:10,147 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-30 13:21:10,149 - INFO - Agent Marilyn Monroe responded: Exactly! Nature is beauty, and we must cherish it ...
+2025-03-30 13:21:10,389 - INFO - Returning 1 responses for conversation conv_1743355259
+2025-03-30 13:21:10,389 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:10] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:10,716 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:10,717 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:10] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:10,731 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:10,732 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:10] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:10,733 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:10,733 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:10] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:10,766 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:10,766 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:10] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:11,144 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:11,145 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:11,145 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:11] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:11,146 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:11] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:11,149 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:11,150 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:11] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:11,151 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:11,152 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:11,152 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:11] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:11,152 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:11] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:11,541 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:11,542 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:11] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:12,372 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:12,372 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:12] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:12,375 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:12,375 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:12] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:12,378 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:12,379 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:12,379 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:12] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:12,379 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:12] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:13,381 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:13,381 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:13] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:13,384 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:13,385 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:13] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:13,386 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:13,386 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:13] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:13,390 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:13,391 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:13,391 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:13,392 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:13] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:13,392 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:13] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:13,392 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:13] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:13,397 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:13,397 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:13] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:13,398 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:13,398 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:13] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:13,405 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:13,406 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:13] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:14,399 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:14,400 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:14] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:14,403 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:14,404 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:14,404 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:14] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:14,405 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:14] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:14,407 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:14,408 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:14] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:14,408 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:14,409 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:14] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:14,415 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:14,415 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:14] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:14,420 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:14,421 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:14,421 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:14] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:14,421 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:14] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:15,416 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:15,416 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:15] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:15,420 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:15,421 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:15] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:15,425 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:15,425 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:15] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:15,429 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:15,430 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:15] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:15,432 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:15,433 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:15] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:15,437 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:15,439 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:15] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:16,455 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:16,456 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:16] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:16,468 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:16,469 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:16] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:16,470 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:16,470 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:16] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:16,474 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:16,475 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:16] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:16,475 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:16,476 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:16,477 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:16] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:16,477 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:16] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:17,505 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:17,505 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:17] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:17,508 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:17,508 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:17,508 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:17] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:17,509 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:17] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:17,511 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:17,512 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:17,512 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:17] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:17,513 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:17] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:18,515 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:18,516 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:18] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:18,518 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:18,519 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:18] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:18,522 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:18,522 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:18] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:18,525 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:18,526 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:18] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:18,527 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:18,527 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:18] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:19,543 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:19,543 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:19] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:19,546 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:19,546 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:19] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -
+2025-03-30 13:21:19,547 - INFO - Returning 0 responses for conversation conv_1743355259
+2025-03-30 13:21:19,547 - INFO - 127.0.0.1 - - [30/Mar/2025 13:21:19] "GET /get_responses/conv_1743355259 HTTP/1.1" 200 -

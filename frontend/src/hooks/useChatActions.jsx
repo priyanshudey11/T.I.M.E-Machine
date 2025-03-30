@@ -205,7 +205,7 @@ export const useChatActions = () => {
       console.log("Current conversation ID:", currentConversationId);
       
       // Validate the agent ID
-      const validAgentIds = ['einstein', 'monroe', 'turing', 'roosevelt', 'group_chat'];
+      const validAgentIds = ['einstein', 'monroe', 'turing', 'roosevelt', 'tesla', 'edison', 'group_chat'];
       if (!isGroupChat && !validAgentIds.includes(currentChat.id)) {
         throw new Error(`Invalid agent ID: ${currentChat.id}. Please select a valid agent.`);
       }
@@ -301,7 +301,7 @@ export const useChatActions = () => {
     }
 
     // Validate the agent ID
-    const validAgentIds = ['einstein', 'monroe', 'turing', 'roosevelt', 'group_chat'];
+    const validAgentIds = ['einstein', 'monroe', 'turing', 'roosevelt', 'tesla', 'edison', 'group_chat'];
     if (!validAgentIds.includes(agentId)) {
       console.error(`Invalid agent ID: ${agentId}`);
       setApiError(`Error: Invalid agent ID: ${agentId}. Please select a valid agent.`);
