@@ -5,17 +5,21 @@ A chat application that allows you to interact with historical figures using AI.
 ## Setup
 
 ### Frontend (React)
-1. Install Node.js dependencies:
+1. Change Folder
+   ```bash
+   cd frontend
+   ```
+3.  Install Node.js dependencies:
 ```bash
 npm install
 ```
-
-2. Start the development server:
+3. Start the development server:
 ```bash
 npm start
 ```
 
 ### Backend (Python)
+
 1. Create a virtual environment and activate it:
 ```bash
 python -m venv venv
@@ -23,6 +27,7 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
 2. Install Python dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
