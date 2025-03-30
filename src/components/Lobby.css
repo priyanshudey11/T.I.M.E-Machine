@@ -1,126 +1,191 @@
 /* src/components/Lobby.css */
 .lobby-page {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.lobby-container {
+  display: flex;
+  gap: 1rem;
+  flex: 1;
+  padding: 1rem;
+  box-sizing: border-box;
+  overflow: hidden; /* Ensure nothing bleeds outside */
+}
+
+.panel-content {
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Retro style scrollbar if needed */
+.panel-content::-webkit-scrollbar {
+  width: 10px;
+}
+.panel-content::-webkit-scrollbar-track {
+  background: #333;
+}
+.panel-content::-webkit-scrollbar-thumb {
+  background: #555;
+  border: 2px solid #333;
+  border-radius: 4px;
+}
+
+.members-panel {
+  flex: 1;
+}
+
+.chats-panel {
+  flex: 2;
+}
+
+.members-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+/* Retro button style for member squares */
+.member-card {
+  background: #f0f0f0;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  padding: 0.5rem;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  color: black; /* Ensure text is black */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 140px;
+  height: 220px;
+}
+
+.member-card:focus {
+  outline: none;
+}
+
+.member-name {
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.member-status-container {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.status-circle {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-circle.online {
+  background-color: green;
+}
+
+.status-circle.offline {
+  background-color: red;
+}
+
+.member-status {
+  font-size: 0.8rem;
+}
+
+.last-seen {
+  font-size: 0.6rem;
+  color: #666;
+  margin-top: 0.2rem;
+}
+
+/* Blue outline around avatar animations */
+.avatar-animation {
+  border: 2px solid blue;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+}
+
+.chat-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-info {
+  text-align: left;
+  width: 100%;
+}
+
+.chat-info h4 {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.chat-info p {
+  margin: 0;
+  font-size: 0.7rem;
+}
+
+.new-chat-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.new-chat-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transform: skewX(-25deg);
+  opacity: 0;
+  animation: shine 3s infinite;
+}
+
+.new-chat-button:hover::after {
+  animation: shine 1s infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+    opacity: 0;
   }
-  
-  .lobby-container {
-    display: flex;
-    gap: 1rem;
-    flex: 1;
-    padding: 1rem;
-    box-sizing: border-box;
-    overflow: hidden; /* Ensure nothing bleeds outside */
+  10% {
+    left: -100%;
+    opacity: 0;
   }
-  
-  /* This class is now applied on WindowContent */
-  .panel-content {
-    height: 100%;  /* Fill the WindowContent height */
-    overflow-y: auto;
+  20% {
+    left: 0;
+    opacity: 1;
   }
-  
-  /* Retro style scrollbar if needed */
-  .panel-content::-webkit-scrollbar {
-    width: 10px;
+  30% {
+    left: 100%;
+    opacity: 1;
   }
-  .panel-content::-webkit-scrollbar-track {
-    background: #333;
+  40% {
+    left: 100%;
+    opacity: 0;
   }
-  .panel-content::-webkit-scrollbar-thumb {
-    background: #555;
-    border: 2px solid #333;
-    border-radius: 4px;
+  100% {
+    left: 100%;
+    opacity: 0;
   }
-  
-  .members-panel {
-    flex: 1;
-  }
-  
-  .chats-panel {
-    flex: 2;
-  }
-  
-  .members-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-  
-  .member-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: #f0f0f0;
-    padding: 0.5rem;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-family: 'Press Start 2P', monospace;
-    font-size: 10px;
-  }
-  
-  .member-card img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    margin: 0.5rem 0;
-  }
-  
-  .member-name {
-    font-weight: bold;
-    margin-bottom: 0.25rem;
-  }
-  
-  .member-status-container {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-  }
-  
-  .status-circle {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-  }
-  
-  .status-circle.online {
-    background-color: green;
-  }
-  
-  .status-circle.offline {
-    background-color: red;
-  }
-  
-  .member-status {
-    font-size: 0.8rem;
-  }
-  
-  .last-seen {
-    font-size: 0.6rem;
-    color: #666;
-    margin-top: 0.2rem;
-  }
-  
-  .chat-list {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .chat-info {
-    text-align: left;
-    width: 100%;
-  }
-  
-  .chat-info h4 {
-    margin: 0;
-    font-size: 0.9rem;
-  }
-  
-  .chat-info p {
-    margin: 0;
-    font-size: 0.7rem;
-  }
-  
+}
