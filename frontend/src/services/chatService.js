@@ -1,314 +1,358 @@
-// src/services/chatService.js
-// Service for communicating with the T.I.M.E. Machine backend
+// Chat service for handling AI responses and chat history storage
 
-// Use direct URL to backend instead of proxy
-const API_BASE_URL = 'http://localhost:8000';
+// Constants
+const STORAGE_KEY = 'time_machine_conversations';
+const BACKEND_URL = 'http://localhost:5000'; // Python backend URL
 
-// Map our frontend IDs to the backend expected format
-const AGENT_ID_MAPPING = {
+// Map frontend agent IDs to backend agent names (exactly as they appear in Chat_main.py)
+const AGENT_MAPPING = {
   'einstein': 'Albert Einstein',
   'monroe': 'Marilyn Monroe',
-  'turing': 'Alan Turing',
-  'roosevelt': 'Theodore Roosevelt'
+  'turing': 'Alan Turing'
 };
 
-/**
- * Convert our frontend agent ID to the backend expected format
- * @param {string} agentId - The frontend agent ID
- * @returns {string} - The corresponding backend agent name
- */
-const getAgentNameForBackend = (agentId) => {
-  return AGENT_ID_MAPPING[agentId] || agentId;
+// Logging utility
+const log = {
+  info: (message, data = null) => {
+    console.log(`[INFO] ${message}`, data || '');
+  },
+  error: (message, error = null) => {
+    console.error(`[ERROR] ${message}`, error || '');
+  },
+  debug: (message, data = null) => {
+    console.debug(`[DEBUG] ${message}`, data || '');
+  }
 };
 
-/**
- * Start a new conversation with a specific agent or a group of agents
- * @param {string} agentId - The ID of the agent (single-agent mode)
- * @param {string} message - Initial message to send
- * @param {boolean} isMultiAgent - Whether this is a multi-agent conversation
- * @param {Array<string>} agentList - List of agent names for multi-agent mode
- * @returns {Promise<Object>} - The conversation information
- */
-export const startConversation = async (agentId, message, isMultiAgent = false, agentList = []) => {
+// API status tracking
+let apiStatus = 'unknown'; // 'online', 'offline', 'unknown'
+let currentConversationId = null;
+
+// Check API connectivity
+const checkApiStatus = async () => {
   try {
-    // Validate agent ID if provided
-    if (agentId && !['einstein', 'monroe', 'turing', 'roosevelt', 'group_chat'].includes(agentId)) {
+    log.info('Checking API status');
+    const response = await fetch(`${BACKEND_URL}/chat`, {
+      method: 'OPTIONS',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      mode: 'cors'
+    });
+    
+    apiStatus = response.ok ? 'online' : 'offline';
+    log.info(`API status: ${apiStatus}`);
+    return apiStatus;
+  } catch (error) {
+    log.error('API check failed:', error);
+    apiStatus = 'offline';
+    return apiStatus;
+  }
+};
+
+// Get current API status
+const getApiStatus = () => {
+  return apiStatus;
+};
+
+// Start a new conversation - can be single or multi-agent
+const startConversation = async (agentId = null, message = '', isMultiAgent = false, agentList = null) => {
+  try {
+    log.info(`Starting new ${isMultiAgent ? 'multi-agent' : 'single-agent'} conversation`);
+    
+    // Build the payload
+    const payload = {
+      multi_agent: isMultiAgent,
+      message: message || '' // Ensure message is never null
+    };
+    
+    // If agentList is provided, use it directly
+    if (agentList && Array.isArray(agentList) && agentList.length > 0) {
+      payload.agent_list = agentList;
+      log.debug(`Using explicit agent_list: ${agentList}`);
+    }
+    // Otherwise, add agent_id if this is a single-agent conversation
+    else if (!isMultiAgent && agentId) {
+      const fullAgentName = AGENT_MAPPING[agentId.toLowerCase()];
+      if (!fullAgentName) {
+        throw new Error(`Invalid agent ID: ${agentId}`);
+      }
+      payload.agent_id = fullAgentName;
+      
+      // Also add the agent_list for redundancy
+      payload.agent_list = [fullAgentName];
+    }
+    
+    log.debug('Start conversation payload:', payload);
+    
+    const response = await fetch(`${BACKEND_URL}/start_conversation`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+      credentials: 'include',
+      mode: 'cors'
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      log.error(`Backend error: ${response.status}`, errorText);
+      throw new Error(`Failed to start conversation: ${response.status}`);
+    }
+
+    const data = await response.json();
+    currentConversationId = data.conversation_id;
+    log.info(`Started conversation with ID: ${currentConversationId}`);
+    return currentConversationId;
+  } catch (error) {
+    log.error('Error starting conversation:', error);
+    throw error;
+  }
+};
+
+// Get responses for the current conversation
+const getResponses = async (conversationId = null) => {
+  const convId = conversationId || currentConversationId;
+  
+  if (!convId) {
+    throw new Error('No active conversation');
+  }
+
+  try {
+    log.info(`Fetching responses for conversation: ${convId}`);
+    const response = await fetch(`${BACKEND_URL}/get_responses/${convId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      mode: 'cors'
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to get responses: ${response.status}`);
+    }
+
+    const data = await response.json();
+    log.debug('Received responses:', data);
+    return data;
+  } catch (error) {
+    log.error('Error getting responses:', error);
+    throw error;
+  }
+};
+
+// Send a message to a specific agent (single-agent mode)
+const sendAgentMessage = async (agentId, message, conversationId = null, forceNewConversation = true) => {
+  try {
+    // Get the full agent name
+    const fullAgentName = AGENT_MAPPING[agentId.toLowerCase()];
+    if (!fullAgentName) {
       throw new Error(`Invalid agent ID: ${agentId}`);
     }
     
-    // Convert agent ID to backend format if it's a single agent conversation
-    const backendAgentId = agentId ? getAgentNameForBackend(agentId) : null;
+    log.info(`Sending message to agent: ${fullAgentName}`);
     
-    // Make sure agent names in agent list are in the correct format
-    const formattedAgentList = agentList.map(agent => 
-      AGENT_ID_MAPPING[agent] || agent
-    );
-    
-    console.log("Starting conversation with:", {
-      agent_id: backendAgentId,
+    // Prepare the request body
+    const body = {
+      agent: fullAgentName,
       message: message,
-      multi_agent: isMultiAgent,
-      agent_list: formattedAgentList,
-    });
+      multi_agent: false,
+      agent_list: [fullAgentName],
+      force_new_conversation: forceNewConversation
+    };
     
-    const response = await fetch(`${API_BASE_URL}/start_conversation`, {
+    // Only include conversation_id if we have one and aren't forcing a new one
+    if (conversationId && !forceNewConversation) {
+      body.conversation_id = conversationId;
+    }
+    
+    log.debug('Request body:', body);
+    
+    const response = await fetch(`${BACKEND_URL}/chat`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
       },
-      credentials: 'omit', // Don't send cookies
-      mode: 'cors', // Enable CORS
-      body: JSON.stringify({
-        agent_id: backendAgentId,
-        message: message,
-        multi_agent: isMultiAgent,
-        agent_list: formattedAgentList,
-      }),
+      body: JSON.stringify(body),
+      credentials: 'include',
+      mode: 'cors'
     });
 
-    // If the response is not OK
     if (!response.ok) {
-      // Try to parse as JSON
-      let errorData;
-      try {
-        errorData = await response.json();
-      } catch (e) {
-        // If parsing fails, use text
-        const text = await response.text();
-        throw new Error(`Failed with status ${response.status}: ${text || 'No response'}`);
-      }
-      throw new Error(errorData.error || `Failed with status ${response.status}`);
+      const errorText = await response.text();
+      log.error(`Backend error: ${response.status}`, errorText);
+      throw new Error(`Failed to send message: ${response.status}`);
     }
 
-    // Try to parse response JSON
-    try {
-      return await response.json();
-    } catch (e) {
-      const text = await response.text();
-      console.log("Response text:", text);
-      // Return a valid response object anyway
-      return { 
-        conversation_id: `temp_${Date.now()}`,
-        status: 'processing'
-      };
-    }
-  } catch (error) {
-    console.error('Error starting conversation:', error);
-    throw error;
-  }
-};
-
-/**
- * Continue an existing conversation with a new message
- * @param {string} message - The message to send
- * @param {string} conversationId - The ID of the conversation to continue
- * @returns {Promise<Object>} - The updated conversation information
- */
-export const continueConversation = async (message, conversationId) => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/continue_conversation`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      credentials: 'omit', // Don't send cookies
-      mode: 'cors', // Enable CORS
-      body: JSON.stringify({
-        conversation_id: conversationId,
-        message: message,
-      }),
-    });
-
-    // If the response is not OK
-    if (!response.ok) {
-      // Try to parse as JSON
-      let errorData;
-      try {
-        errorData = await response.json();
-      } catch (e) {
-        // If parsing fails, use text
-        const text = await response.text();
-        throw new Error(`Failed with status ${response.status}: ${text || 'No response'}`);
-      }
-      throw new Error(errorData.error || `Failed with status ${response.status}`);
-    }
-
-    // Try to parse response JSON
-    try {
-      return await response.json();
-    } catch (e) {
-      console.log("Failed to parse JSON response:", e);
-      // Return a valid response object anyway
-      return { 
-        conversation_id: conversationId,
-        status: 'processing'
-      };
-    }
-  } catch (error) {
-    console.error('Error continuing conversation:', error);
-    throw error;
-  }
-};
-
-/**
- * Get responses for an ongoing conversation
- * @param {string} conversationId - The ID of the conversation
- * @returns {Promise<Object>} - The responses
- */
-export const getResponses = async (conversationId) => {
-  try {
-    const url = `${API_BASE_URL}/get_responses/${conversationId}`;
-    console.log(`Fetching responses from: ${url}`);
+    // Update API status on successful response
+    apiStatus = 'online';
     
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-      },
-      credentials: 'omit', // Don't send cookies
-      mode: 'cors', // Enable CORS
-    });
-
-    console.log(`Response status: ${response.status}`);
+    // Get the conversation ID from the response
+    const data = await response.json();
+    currentConversationId = data.conversation_id;
     
-    // If the response is not OK
-    if (!response.ok) {
-      // Try to parse as JSON
-      let errorData;
-      try {
-        errorData = await response.json();
-        console.error("Error response JSON:", errorData);
-      } catch (e) {
-        // If parsing fails, use text
-        const text = await response.text();
-        console.error("Error response text:", text);
-        throw new Error(`Failed with status ${response.status}: ${text || 'No response'}`);
-      }
-      throw new Error(errorData.error || `Failed with status ${response.status}`);
-    }
-
-    // Try to parse response JSON
-    try {
-      const responseText = await response.text();
-      console.log("Raw response text:", responseText);
-      
-      // Manually parse JSON to avoid issues
-      const data = JSON.parse(responseText);
-      console.log("Parsed response data:", data);
-      
-      // Fix any potential issues with the response format
-      if (!data.responses) {
-        console.warn("Response missing 'responses' field, adding empty array");
-        data.responses = [];
-      }
-      
-      return data;
-    } catch (e) {
-      console.error("Failed to parse JSON response:", e);
-      // Return empty responses as fallback
-      return { 
-        conversation_id: conversationId,
-        responses: [],
-        has_more: false
-      };
-    }
+    // Start polling for responses
+    return pollResponses(currentConversationId);
   } catch (error) {
-    console.error('Error getting responses:', error);
+    log.error('Error sending message:', error);
+    apiStatus = 'offline';
     throw error;
   }
 };
 
-/**
- * Send a message to a specific agent (convenience method)
- * @param {string} agentId - The ID of the agent
- * @param {string} message - The message to send
- * @param {string} conversationId - Optional conversation ID for existing conversations
- * @returns {Promise<Object>} - The conversation information
- */
-export const sendAgentMessage = async (agentId, message, conversationId = null) => {
-  try {
-    if (!conversationId) {
-      // Start a new conversation
-      return await startConversation(agentId, message);
-    } else {
-      // Continue existing conversation
-      return await continueConversation(message, conversationId);
-    }
-  } catch (error) {
-    console.error('Error sending message to agent:', error);
-    throw error;
-  }
-};
-
-/**
- * Poll for responses until there are no more
- * @param {string} conversationId - The ID of the conversation
- * @param {function} onNewResponses - Callback for when new responses are received
- * @param {number} maxAttempts - Maximum number of polling attempts (default: 10)
- * @param {number} interval - Interval between polls in ms (default: 1000)
- */
-export const pollForResponses = async (
-  conversationId,
-  onNewResponses,
-  maxAttempts = 10,
-  interval = 1000
-) => {
-  let attempts = 0;
-  let emptyResponseCount = 0;
+// Continue an existing multi-agent conversation
+const continueConversation = async (message, conversationId = null) => {
+  const convId = conversationId || currentConversationId;
   
-  const poll = async () => {
-    if (attempts >= maxAttempts) {
-      console.log(`Reached max polling attempts (${maxAttempts}), stopping poll.`);
-      return;
+  if (!convId) {
+    throw new Error('No active conversation');
+  }
+
+  try {
+    log.info(`Continuing conversation: ${convId}`);
+    const response = await fetch(`${BACKEND_URL}/continue_conversation`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        conversation_id: convId,
+        message: message
+      }),
+      credentials: 'include',
+      mode: 'cors'
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      log.error(`Backend error: ${response.status}`, errorText);
+      throw new Error(`Failed to continue conversation: ${response.status}`);
     }
+
+    // Update API status on successful response
+    apiStatus = 'online';
     
+    // Start polling for responses
+    return pollResponses(convId);
+  } catch (error) {
+    log.error('Error continuing conversation:', error);
+    apiStatus = 'offline';
+    throw error;
+  }
+};
+
+// Poll for new responses
+const pollResponses = async (conversationId = null, maxAttempts = 10) => {
+  const convId = conversationId || currentConversationId;
+  
+  if (!convId) {
+    throw new Error('No active conversation ID for polling');
+  }
+  
+  let attempts = 0;
+  const pollInterval = 500; // 0.5 second
+  let allResponses = [];
+
+  const poll = async () => {
     try {
-      console.log(`Polling for responses (attempt ${attempts+1}/${maxAttempts})...`);
-      const data = await getResponses(conversationId);
-      console.log("Got response data:", data);
+      const data = await getResponses(convId);
       
+      // Check if we have any responses
       if (data.responses && data.responses.length > 0) {
-        console.log(`Received ${data.responses.length} responses`);
-        // Call the callback with new responses
-        onNewResponses(data.responses);
-        
-        // Reset empty response counter since we got responses
-        emptyResponseCount = 0;
-        
-        // Continue polling for more responses
-        setTimeout(poll, interval);
-      } else {
-        attempts++;
-        emptyResponseCount++;
-        console.log(`No responses received, empty count: ${emptyResponseCount}`);
-        
-        // Continue polling for a while even with empty responses
-        // This is important because the backend might still be generating
-        if (emptyResponseCount < 10) {
-          setTimeout(poll, interval);
-        } else {
-          console.log("Too many empty responses, stopping poll.");
-        }
+        // Add these responses to our collection
+        allResponses = [...allResponses, ...data.responses];
+        return allResponses; // Return immediately if we have responses
       }
-    } catch (error) {
-      console.error('Error polling for responses:', error);
-      attempts++;
+      
+      // Continue polling if there might be more responses
       if (attempts < maxAttempts) {
-        setTimeout(poll, interval * 2); // Increase interval on error
+        attempts++;
+        await new Promise(resolve => setTimeout(resolve, pollInterval));
+        return poll();
       }
+      
+      return allResponses;
+    } catch (error) {
+      log.error('Error polling responses:', error);
+      throw error;
     }
   };
-  
-  // Start polling
-  poll();
+
+  return poll();
 };
 
-export default {
+// Save conversations to localStorage
+const saveConversations = (conversations) => {
+  try {
+    log.info('Saving conversations to localStorage');
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(conversations));
+    return true;
+  } catch (error) {
+    log.error('Error saving conversations:', error);
+    return false;
+  }
+};
+
+// Load conversations from localStorage
+const loadConversations = () => {
+  try {
+    log.info('Loading conversations from localStorage');
+    const saved = localStorage.getItem(STORAGE_KEY);
+    const conversations = saved ? JSON.parse(saved) : {};
+    
+    // Filter out conversations for agents that no longer exist
+    const filteredConversations = {};
+    Object.keys(AGENT_MAPPING).forEach(agentId => {
+      if (conversations[agentId]) {
+        filteredConversations[agentId] = conversations[agentId];
+      }
+    });
+    
+    log.debug('Filtered conversations:', filteredConversations);
+    return filteredConversations;
+  } catch (error) {
+    log.error('Error loading conversations:', error);
+    return {};
+  }
+};
+
+// Clear all conversations
+const clearConversations = () => {
+  try {
+    log.info('Clearing all conversations');
+    localStorage.removeItem(STORAGE_KEY);
+    currentConversationId = null;
+    return true;
+  } catch (error) {
+    log.error('Error clearing conversations:', error);
+    return false;
+  }
+};
+
+// Initialize by checking API status
+const initialize = async () => {
+  await checkApiStatus();
+  return apiStatus;
+};
+
+// Reset the current conversation ID
+const resetConversationId = () => {
+  currentConversationId = null;
+};
+
+export {
+  sendAgentMessage,
+  getResponses,
   startConversation,
   continueConversation,
-  getResponses,
-  sendAgentMessage,
-  pollForResponses
-}; 
+  saveConversations,
+  loadConversations,
+  clearConversations,
+  checkApiStatus,
+  getApiStatus,
+  initialize,
+  resetConversationId
+};
