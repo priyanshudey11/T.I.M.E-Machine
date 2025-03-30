@@ -4,7 +4,7 @@ import logging
 import sys
 from datetime import datetime
 import os
-import openai
+import google.generativeai as genai  # Import Google's Generative AI library
 import random
 import threading
 import time
@@ -21,9 +21,12 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Set up OpenAI API
-openai.api_key = os.getenv("OPENAI_API_KEY")
-client = openai.OpenAI()
+# Set up Gemini API
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+if not GEMINI_API_KEY:
+    logger.error("GEMINI_API_KEY environment variable not set!")
+    
+genai.configure(api_key=GEMINI_API_KEY)
 
 app = Flask(__name__)
 # Configure CORS properly
@@ -105,21 +108,38 @@ class Agent:
 
     def get_response(self, conversation_history):
         """
-        Get the agent's response by combining its system prompt with the conversation history.
+        Get the agent's response using Google's Gemini API.
         Returns the validated and cleaned reply from the model.
         """
-        messages = [{"role": "system", "content": self.system_prompt}] + conversation_history
         try:
-            logger.debug(f"Sending request to OpenAI for {self.name}")
-            logger.debug(f"Messages: {messages}")
+            logger.debug(f"Sending request to Gemini for {self.name}")
             
-            response = client.chat.completions.create(
-                model="gpt-4o-mini",  # You can change the model as needed
-                messages=messages,
-                temperature=0.7,
-                max_tokens=150,
+            # Convert conversation_history to a format that Gemini can understand
+            gemini_messages = []
+            
+            # Start with the system prompt
+            gemini_messages.append({"role": "system", "parts": [self.system_prompt]})
+            
+            # Add the rest of the messages from conversation history
+            for msg in conversation_history:
+                role = "user" if msg["role"] == "user" else "model"
+                gemini_messages.append({"role": role, "parts": [msg["content"]]})
+            
+            logger.debug(f"Messages: {gemini_messages}")
+            
+            # Create a Gemini model
+            model = genai.GenerativeModel('gemini-1.5-pro')
+            
+            # Generate a response
+            response = model.generate_content(
+                gemini_messages,
+                generation_config={
+                    "temperature": 0.7,
+                    "max_output_tokens": 150,
+                }
             )
-            reply = response.choices[0].message.content.strip()
+            
+            reply = response.text.strip()
             logger.debug(f"Received raw response for {self.name}: {reply[:50]}...")
             
             # Validate and clean the response

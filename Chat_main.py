@@ -1,11 +1,14 @@
-import openai
+import google.generativeai as genai  # Import Google's Generative AI library
 import os
 import random
 import time
 
-# Set your OpenAI API key; ensure you have it in your environment variables.
-openai.api_key = os.getenv("OPENAI_API_KEY")
-client = openai.OpenAI()
+# Set your Gemini API key; ensure you have it in your environment variables.
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+if not GEMINI_API_KEY:
+    print("GEMINI_API_KEY environment variable not set!")
+    
+genai.configure(api_key=GEMINI_API_KEY)
 
 # Updated system prompts with enhanced safeguards against impersonation
 CHARACTER_PROMPTS = {
@@ -54,18 +57,34 @@ class Agent:
 
     def get_response(self, conversation_history):
         """
-        Get the agent's response by combining its system prompt with the conversation history.
+        Get the agent's response using Google's Gemini API.
         Returns the validated and cleaned reply from the model.
         """
-        messages = [{"role": "system", "content": self.system_prompt}] + conversation_history
         try:
-            response = client.chat.completions.create(
-                model="gpt-4o-mini",  # You can change this to another model if needed
-                messages=messages,
-                temperature=0.7,
-                max_tokens=150,
+            # Convert conversation_history to a format that Gemini can understand
+            gemini_messages = []
+            
+            # Start with the system prompt
+            gemini_messages.append({"role": "system", "parts": [self.system_prompt]})
+            
+            # Add the rest of the messages from conversation history
+            for msg in conversation_history:
+                role = "user" if msg["role"] == "user" else "model"
+                gemini_messages.append({"role": role, "parts": [msg["content"]]})
+            
+            # Create a Gemini model
+            model = genai.GenerativeModel('gemini-1.5-pro')
+            
+            # Generate a response
+            response = model.generate_content(
+                gemini_messages,
+                generation_config={
+                    "temperature": 0.7,
+                    "max_output_tokens": 150,
+                }
             )
-            reply = response.choices[0].message.content.strip()
+            
+            reply = response.text.strip()
             
             # Validate and clean the response
             cleaned_reply = self.validate_and_clean_response(reply)
