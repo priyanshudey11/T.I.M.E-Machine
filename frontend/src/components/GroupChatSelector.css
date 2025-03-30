@@ -1,0 +1,89 @@
+.group-chat-selector {
+  background-color: #222;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+.group-chat-selector h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #64ff8f;
+}
+
+.chat-list {
+  margin-bottom: 1rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.chat-item {
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  border: 1px solid #444;
+}
+
+.chat-item:hover {
+  background-color: #333;
+}
+
+.chat-item.active {
+  background-color: #383838;
+  border-color: #64ff8f;
+}
+
+.chat-name {
+  font-size: 0.9rem;
+}
+
+.new-chat-btn {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: #444;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.new-chat-btn:hover {
+  background-color: #555;
+}
+
+.new-chat-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.new-chat-input input {
+  padding: 0.5rem;
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 4px;
+}
+
+.new-chat-input button {
+  padding: 0.5rem;
+  background-color: #64ff8f;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.new-chat-input .cancel-btn {
+  background-color: #555;
+  color: #fff;
+} 

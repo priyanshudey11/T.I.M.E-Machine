@@ -1,0 +1,117 @@
+/* src/components/RetroComputer.css */
+
+.retro-computer {
+  position: fixed;
+  width: 800px;
+  height: 600px;
+  border: 8px solid #000;
+  background: black;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  cursor: url('/pixely-cursor.png') 4 4, auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+}
+
+.boot-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  color: #0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Press Start 2P', monospace;
+  animation: bootAnimation 2s ease-out;
+  z-index: 1000;
+}
+
+@keyframes bootAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.screen-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding-bottom: 20px;
+  overflow-anchor: none;
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Fix for text fields being cut off */
+input, textarea, .react95-Button {
+  z-index: 100;
+  position: relative;
+}
+
+/* Ensure WindowContent properly contains its children */
+.react95-WindowContent {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 30px) !important;
+  overflow: hidden;
+}
+
+/* Ensure forms and their inputs are visible */
+form {
+  margin-bottom: 0;
+  position: relative;
+  z-index: 100;
+  min-height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+/* Ensure text field is visible */
+.react95-TextField {
+  background-color: white !important;
+  border: 2px inset #dfdfdf !important;
+  position: relative;
+  z-index: 200;
+  flex: 1;
+}
+
+/* Add fixed positioning for the text input container */
+.message-input-container {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #efefef;
+  padding: 8px;
+  border-top: 1px solid #ccc;
+}
+
+/* Prevent scrolling issues */
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+}

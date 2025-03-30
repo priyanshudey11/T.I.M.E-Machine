@@ -1,0 +1,105 @@
+/* src/components/Chat.css */
+
+.chat-page {
+  /* --- Fix for Scrolling Issue --- */
+  position: absolute; /* Position relative to nearest positioned ancestor (should be #root) */
+  top: 0;
+  left: 0;
+  width: 100%;        /* Fill the positioned ancestor */
+  height: 100%;       /* Fill the positioned ancestor */
+  overflow: hidden;   /* Prevent this container itself from scrolling */
+  /* --- Original Styles --- */
+  display: flex;      /* Use flexbox for internal layout (Window) */
+  flex-direction: column;
+  background: #000000; /* Optional: background for the page area */
+}
+
+/* Container specifically for messages *inside* the ScrollView */
+.messages-container {
+  padding: 8px;
+  font-family: 'Courier New', monospace;
+  /* Removed border: 2px inset #dfdfdf; - This might look odd inside ScrollView, let ScrollView handle borders if needed */
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* Added small gap between messages */
+}
+
+/* Base style for individual message bubbles */
+.message {
+  padding: 8px 12px; /* Slightly adjusted padding */
+  margin-bottom: 4px;
+  max-width: 80%;
+  word-wrap: break-word; /* Use word-wrap instead of break-word for better breaking */
+  border: 1px solid #dfdfdf;
+  background: #ffffff;
+  border-radius: 6px; /* Optional: slightly rounded corners */
+  line-height: 1.4;   /* Moved common line-height here */
+  white-space: pre-wrap; /* Ensure whitespace/newlines are preserved */
+}
+
+/* Style for user messages */
+.message.user {
+  margin-left: auto; /* Align right */
+  border-color: #a8d7a8;
+  background: #e8f8e8;
+  color: #333; /* Ensure text color has good contrast */
+}
+
+/* Style for agent messages */
+.message.agent {
+  margin-right: auto; /* Align left */
+  border-color: #d7d7d7;
+  background: #f8f8f8;
+  color: #333; /* Ensure text color has good contrast */
+}
+
+/* Style for agent name label inside agent messages */
+.message.agent .agent-name {
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #000080; /* Agent name color */
+  font-size: 0.9em; /* Slightly smaller */
+}
+
+/* Style for system messages */
+.message.system {
+  margin: 4px auto; /* Center align */
+  max-width: 90%; /* Can be wider */
+  border-color: #d7a8a8;
+  background: #f8e8e8;
+  color: #666;
+  font-style: italic;
+  text-align: center;
+}
+
+/* Style for loading indicators */
+.message.loading {
+  margin: 4px auto; /* Center align */
+  border: none;
+  background: transparent;
+  color: #888; /* Slightly different color */
+  font-style: italic;
+  text-align: center;
+}
+
+/* Optional: Style for the text input form area */
+.chat-input-form {
+  display: flex;
+  gap: 8px;
+  padding: 8px; /* Give form its own padding separate from WindowContent */
+  border-top: 2px groove threedface; /* react95 style border */
+}
+
+/* Optional: Style targeting the Send Button if needed */
+.send-button {
+  align-self: flex-end;
+  height: 2.5rem; /* Matches inline style */
+  min-width: 80px; /* Matches inline style */
+}
+
+/* Optional: Style targeting the Text Field */
+.message-input-field {
+  flex: 1;
+  resize: none;
+  font-family: "Courier New", monospace !important; /* Use !important if react95 overrides */
+}
