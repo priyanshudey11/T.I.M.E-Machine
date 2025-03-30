@@ -27,8 +27,7 @@ client = openai.OpenAI()
 
 app = Flask(__name__)
 # Configure CORS properly
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}}, supports_credentials=True)
-
+CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "http://localhost:5173", "http://localhost:5174"]}}, supports_credentials=True)
 # Updated system prompts with enhanced safeguards against impersonation
 CHARACTER_PROMPTS = {
     "Albert Einstein": (
@@ -328,7 +327,14 @@ def generate_agent_responses(conversation_id, user_message, agent_list=None, res
 
 @app.after_request
 def after_request(response):
-    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
+    request_origin = request.headers.get('Origin')
+    allowed_origins = ["http://localhost:3000", "http://localhost:5173", "http://localhost:5174"]
+    
+    if request_origin in allowed_origins:
+        response.headers.add('Access-Control-Allow-Origin', request_origin)
+    else:
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
     response.headers.add('Access-Control-Allow-Credentials', 'true')

@@ -177,7 +177,7 @@ const sendAgentMessage = async (agentId, message, conversationId = null, forceNe
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
-      credentials: 'include',
+      credentials: 'omit',
       mode: 'cors'
     });
 
