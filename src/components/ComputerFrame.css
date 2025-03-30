@@ -1,0 +1,32 @@
+/* src/components/ComputerFrame.css */
+.computer-frame {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000; /* fallback background */
+  }
+  
+  /* Container for the TIME.exe UI – adjust these values to align with your transparent screen */
+  .time-ui {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 800px;    /* Adjust to your TIME.exe UI width */
+    height: 600px;   /* Adjust to your TIME.exe UI height */
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+  
+  /* The computer overlay covers the entire screen */
+  .computer-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 2;
+    pointer-events: none; /* Let clicks pass through to TIME.exe UI */
+  }
+  

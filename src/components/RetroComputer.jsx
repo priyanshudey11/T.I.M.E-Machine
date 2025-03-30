@@ -18,8 +18,19 @@ const RetroComputer = ({ children }) => {
         Your browser does not support the video tag.
       </video>
       <div className="screen-content">
-        {children}
-        <VHSOverlay />
+        {!poweredOn ? (
+          <div className="boot-screen">
+            <img src="/time_logo.png" alt="TIME Logo" className="time-logo" />
+            <div className="loading-bar">
+              <div className="loading-progress"></div>
+            </div>
+          </div>
+        ) : (
+          <>
+            {children}
+            <VHSOverlay />
+          </>
+        )}
       </div>
     </div>
   );
